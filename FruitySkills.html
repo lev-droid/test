@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://fruityskills.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>FruitySkills</title>
+   <link href="./FruitySkills_files/css" rel="stylesheet" type="text/css"><link rel="stylesheet" href="./FruitySkills_files/style.css">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  
+  html {
+    background: rgba(0, 0, 0, 0.7) !important;
+  }
+  .content1 {
+      display:inline-block !important; 
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%; 
+      min-height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: #f1f1f1;
+      padding: 20px;
+    }
+
+    .row1 {
+      display: flex;
+      position: fixed;
+      top: 48%;
+      left: 50%;
+      /* bring your own prefixes */
+      transform: translate(-50%, -50%);
+    }
+
+    .column1 {
+        padding: 10px;
+    }
+
+    .intro {
+      top: 33% !important;
+    }
+</style>
+
+</head>
+<body>
+
+  <div id="captcha">
+    <div class="content1">
+      <div class="row1">
+        <div class="column1">
+            <a style="color: #DD51C8;font-size:25px;cursor: pointer;" onclick="enterSite();">click to enter</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div id="particles" style="display: none;"><canvas class="pg-canvas" width="1536" height="688"></canvas>
+  <div id="mainSite" style="display: none;">
+
+    <div class="intro" style="margin-top: 0px;">
+      <h1>FruitySkills</h1>
+      <p class="typewrite" data-period="2000" data-type="[ &quot;Pasting since 2017.&quot;, &quot;Sponsored by NordVPN.&quot;, &quot;Fun for me, not for you.&quot;, &quot;Sucks to suck.&quot;, &quot;Hi.&quot;, &quot;Alright princesses, I am off to bed to have a wank.&quot;, &quot;Lewis is omniscient.&quot;, &quot;Undetected Rust hack 2021 no survey.&quot;, &quot;Wait give me a minute, let me think of a good quote.&quot;, &quot;Making these racks no servers.&quot; ]"><span class="wrap">Pasting since</span></p>
+      <a href="https://discord.gg/J8eC5dfvxe" class="btn">Discord</a>
+      <a href="https://fruityskills.com/panel/" class="btn">Panel</a>
+
+    </div>
+  </div>
+
+</div>
+<!-- partial -->
+  <script src="./FruitySkills_files/jquery.min.js.download"></script><script src="./FruitySkills_files/script.js.download"></script>
+
+  <script>
+  
+var x = document.getElementById("mainSite");
+var z = document.getElementById("particles");
+var y = document.getElementById("captcha");
+
+var audio = new Audio('chill.mp3');
+
+x.style.display = "none";
+z.style.display = "none";
+
+function enterSite() {
+  audio.volume = 0.10;
+  audio.loop = true;
+	audio.play();
+	x.style.display = "block";
+	z.style.display = "block";
+	y.style.display = "none";
+}
+
+var TxtType = function(el, toRotate, period) {
+    this.toRotate = toRotate;
+    this.el = el;
+    this.loopNum = 0;
+    this.period = parseInt(period, 10) || 2000;
+    this.txt = '';
+    this.tick();
+    this.isDeleting = false;
+};
+
+TxtType.prototype.tick = function() {
+    var i = this.loopNum % this.toRotate.length;
+    var fullTxt = this.toRotate[i];
+
+    if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+    } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+    }
+
+    this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+    var that = this;
+    var delta = 200 - Math.random() * 100;
+
+    if (this.isDeleting) { delta /= 2; }
+
+    if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+    } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 500;
+    }
+
+    setTimeout(function() {
+    that.tick();
+    }, delta);
+};
+
+window.onload = function() {
+    var elements = document.getElementsByClassName('typewrite');
+    for (var i=0; i<elements.length; i++) {
+        var toRotate = elements[i].getAttribute('data-type');
+        var period = elements[i].getAttribute('data-period');
+        if (toRotate) {
+          new TxtType(elements[i], JSON.parse(toRotate), period);
+        }
+    }
+    // INJECT CSS
+    var css = document.createElement("style");
+    css.type = "text/css";
+    css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+    document.body.appendChild(css);
+};</script>
+
+
+<style type="text/css">.typewrite > .wrap { border-right: 0.08em solid #fff}</style></body></html>
